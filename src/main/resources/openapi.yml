@@ -1,0 +1,73 @@
+openapi: 3.0.1
+info:
+  title: Book Shop
+  description: Book CRUD API.
+  version: 1.0.0
+servers:
+- url: /v3
+paths:
+  /book/search:
+    post:
+      summary: Get Book
+      operationId: getBook
+      requestBody:
+        description: Search Book
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+  /book/add:
+    post:
+      summary: Add a Book
+      operationId: addBook
+      requestBody:
+        description: Book to be added in shop
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      responses:
+        200:
+          description: Book Added
+          content:
+            application/json:
+              schema:
+                type: string
+      x-codegen-request-body-name: book
+  /book/all:
+   get:
+      summary: Get Books
+      operationId: getBooks
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        sbn:
+          type: string
+          example: S123
+        title:
+          type: string
+          example: Oathbringer
+        author:
+          type: string
+          example: Brandon Sanderson
